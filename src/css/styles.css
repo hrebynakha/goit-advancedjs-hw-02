@@ -1,7 +1,5 @@
 @import url('./utils/vars.css');
 @import url('./utils/reset.css');
-@import url('./components/gallery.css');
-@import url('./components/form.css');
 
 .container {
   min-width: 360px;
@@ -21,11 +19,4 @@
   .container {
     max-width: 1158px;
   }
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  cursor: url('../img/cursor.svg'), pointer;
 }
