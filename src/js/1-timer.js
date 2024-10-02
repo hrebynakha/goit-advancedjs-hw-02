@@ -25,6 +25,7 @@ const options = {
     pickedDate = selectedDates[0].getTime();
     if (pickedDate - Date.now() <= 0) {
       displayError();
+      refs.startBtn.disabled = true;
       return;
     }
     refs.startBtn.disabled = false;
@@ -39,9 +40,16 @@ function handleTimerStart() {
     displayError();
     return;
   }
+  const diff = refs.startBtn.dataset.start - Date.now();
+  if (diff <= 0) {
+    displayError();
+    return;
+  }
+  setTimerText(diff);
   refs.startBtn.disabled = true;
   datePickElement.disabled = true;
   refs.main.classList.add('timer-active');
+
   const intervalId = setInterval(() => {
     const diff = refs.startBtn.dataset.start - Date.now();
     if (diff <= 0) {
@@ -51,8 +59,7 @@ function handleTimerStart() {
       refs.main.classList.remove('timer-active');
       return;
     }
-    const { days, hours, minutes, seconds } = convertMs(diff);
-    setTimerText(days, hours, minutes, seconds);
+    setTimerText(diff);
   }, 1000);
 }
 
@@ -60,7 +67,8 @@ function padify(text) {
   return String(text).toString().padStart(2, '0');
 }
 
-function setTimerText(days, hours, minutes, seconds) {
+function setTimerText(diff) {
+  const { days, hours, minutes, seconds } = convertMs(diff);
   refs.days.textContent = padify(days);
   refs.hours.textContent = padify(hours);
   refs.minutes.textContent = padify(minutes);
