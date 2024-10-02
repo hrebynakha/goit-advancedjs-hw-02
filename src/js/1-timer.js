@@ -13,6 +13,7 @@ const refs = {
   minutes: timeContainer.children[2].children[0],
   seconds: timeContainer.children[3].children[0],
 };
+refs.startBtn.disabled = true;
 let pickedDate = new Date();
 
 const options = {
@@ -26,6 +27,7 @@ const options = {
       displayError();
       return;
     }
+    refs.startBtn.disabled = false;
     refs.startBtn.dataset.start = pickedDate;
   },
 };
@@ -34,15 +36,17 @@ flatpickr(datePickElement, options);
 
 function handleTimerStart() {
   if (!refs.startBtn.dataset.start) {
-    displayWarning();
+    displayError();
     return;
   }
   refs.startBtn.disabled = true;
+  datePickElement.disabled = true;
   refs.main.classList.add('timer-active');
   const intervalId = setInterval(() => {
     const diff = refs.startBtn.dataset.start - Date.now();
     if (diff <= 0) {
       clearInterval(intervalId);
+      datePickElement.disabled = false;
       refs.startBtn.disabled = false;
       refs.main.classList.remove('timer-active');
       return;
@@ -80,13 +84,6 @@ function convertMs(ms) {
 function displayError() {
   iziToast.error({
     message: 'Please choose a date in the future',
-    position: 'topRight',
-  });
-}
-
-function displayWarning() {
-  iziToast.warning({
-    message: 'Date not set or somesthing going wrong',
     position: 'topRight',
   });
 }
