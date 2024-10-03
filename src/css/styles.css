@@ -2,6 +2,7 @@
 @import url('./utils/vars.css');
 @import url('./utils/reset.css');
 @import url('./components/timer.css');
+@import url('./components/snackbar.css');
 
 .container {
   min-width: 360px;
