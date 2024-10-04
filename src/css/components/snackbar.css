@@ -1,5 +1,6 @@
 .container input[name='delay'] {
-  width: 360px;
+  display: block;
+  width: 344px;
   height: 40px;
   border-radius: 8px;
   font-family: var(--font-family);
@@ -32,21 +33,35 @@
 
 .container > form > fieldset {
   border-radius: 8px;
-  padding: 8px 16px;
+  margin: 0;
+  padding: 0;
   width: 360px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  border: 1px solid #808080;
+}
+
+.container > form > fieldset input {
+  display: inline;
+  width: 32px;
+  height: 32px;
 }
 
 .container > form > fieldset label {
-  display: block;
-  background-color: red;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #2e2f42;
+  padding: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .container > form > button {
+  margin-top: 24px;
   width: 360px;
   height: 40px;
   background-color: #4e75ff;
